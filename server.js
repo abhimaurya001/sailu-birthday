@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // Frontend files
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(__dirname));
 
 // Birthday API
 app.get("/api/birthday", (req, res) => {
@@ -22,7 +22,7 @@ app.get("/api/birthday", (req, res) => {
 // Express 5 compatible fallback
 app.use((req, res, next) => {
     if (req.method === "GET" && !req.path.startsWith("/api/")) {
-        res.sendFile(path.join(__dirname, "public", "index.html"));
+        res.sendFile(path.join(__dirname, "index.html"));
     } else {
         next();
     }
